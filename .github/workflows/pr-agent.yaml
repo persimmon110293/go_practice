@@ -21,3 +21,5 @@ jobs:
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_action.auto_describe: true
+          github_action.auto_review:   true
