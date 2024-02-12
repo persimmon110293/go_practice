@@ -7,6 +7,7 @@ COPY ./go/src /go/src/app/
 RUN apk update && apk add git
 
 RUN go mod tidy \
+  && go install github.com/cosmtrek/air@latest \
   && go build
 
 ENV CGO_ENABLED=0 \
@@ -15,4 +16,4 @@ ENV CGO_ENABLED=0 \
 
 EXPOSE 8080
 
-CMD ["go", "run", "server.go"]
+CMD ["air"]
