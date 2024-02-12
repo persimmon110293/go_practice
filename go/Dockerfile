@@ -4,10 +4,12 @@ RUN mkdir /go/src/app
 WORKDIR /go/src/app
 COPY ./go/src /go/src/app/
 
-RUN apk update && apk add git
+RUN apk update && apk add git \
+  && apk add vim
 
 RUN go mod tidy \
   && go install github.com/cosmtrek/air@latest \
+  && go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@latest \
   && go build
 
 ENV CGO_ENABLED=0 \
