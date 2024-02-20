@@ -1,15 +1,24 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"encoding/json"
+	"net/http"
+
+	"main/handlers"
+)
 
 func main() {
-	r := gin.Default()
-
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "レスポンスっす",
-		})
+	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+		message := struct {
+			Message string `json:"message"`
+		}{
+			Message: "pong",
+		}
+		response, _ := json.Marshal(message)
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(response)
 	})
 
-	r.Run()
+	http.HandleFunc("/user", handlers.UserHandler.GetUserHandler)
+	http.ListenAndServe(":8080", nil)
 }

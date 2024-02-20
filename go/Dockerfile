@@ -10,6 +10,7 @@ RUN apk update && apk add git \
 RUN go mod tidy \
   && go install github.com/cosmtrek/air@latest \
   && go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@latest \
+  && go get github.com/jinzhu/gorm@latest \
   && go build
 
 ENV CGO_ENABLED=0 \
