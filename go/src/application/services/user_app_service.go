@@ -1,26 +1,24 @@
 package services
 
 import (
-	"main/domain/entities"
-	"main/domain/repositories"
+	"encoding/json"
+	repository "main/domain/repositories"
 	"net/http"
 )
 
 type IUserAppService interface {
-	GetUser(http.ResponseWriter, *http.Request) []entities.User
+	GetUser(http.ResponseWriter, *http.Request) ([]byte, error)
 }
 
 type UserAppService struct {
-	repository repositories.IUserRepository
+	repository repository.IUserRepository
 }
 
 func NewUserAppService() IUserAppService {
 	return &UserAppService{}
 }
 
-func (app_service *UserAppService) GetUser(w http.ResponseWriter, r *http.Request) []entities.User {
-	// TODO: ここでrepositoryを呼ぶ
-	// TODO: ここでuserエンティティをreturnする
+func (app_service *UserAppService) GetUser(w http.ResponseWriter, r *http.Request) ([]byte, error) {
 	user := app_service.repository.Find()
-	return user
+	return json.Marshal(user)
 }

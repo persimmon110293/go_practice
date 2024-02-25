@@ -1,24 +1,22 @@
 package usecases
 
 import (
-	"main/application/services"
-	"main/domain/entities"
+	service "main/application/services"
 	"net/http"
 )
 
 type IUserUsecase interface {
-	GetUser(http.ResponseWriter, *http.Request) []entities.User
+	GetUser(http.ResponseWriter, *http.Request) ([]byte, error)
 }
 
 type UserUsecase struct {
-	app_service services.IUserAppService
+	app_service service.IUserAppService
 }
 
 func NewUserUsecase() *UserUsecase {
 	return &UserUsecase{}
 }
 
-func (usecase *UserUsecase) GetUser(w http.ResponseWriter, r *http.Request) []entities.User {
-	// TODO: ここでapp_serviceを呼ぶ
+func (usecase *UserUsecase) GetUser(w http.ResponseWriter, r *http.Request) ([]byte, error) {
 	return usecase.app_service.GetUser(w, r)
 }

@@ -5,14 +5,9 @@ import (
 	"net/http"
 )
 
-type UserHandler struct {
-	usecase usecases.IUserUsecase
-}
-
-func NewUserHandler(usecase usecases.IUserUsecase) *UserHandler {
-	return &UserHandler{usecase}
-}
+type UserHandler struct{}
 
 func (user_handler *UserHandler) GetUserHandler(w http.ResponseWriter, r *http.Request) {
-	user_handler.usecase.GetUser(w, r)
+	usecase := usecases.NewUserUsecase()
+	usecase.GetUser(w, r)
 }

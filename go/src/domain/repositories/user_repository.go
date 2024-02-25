@@ -1,11 +1,14 @@
 package repositories
 
 import (
-	"main/domain/entities"
+	entity "main/domain/entities"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 type IUserRepository interface {
-	Find() []entities.User
+	Find() *gorm.DB
 }
 
 type UserRepository struct{}
@@ -14,8 +17,18 @@ func NewUserRepository() IUserRepository {
 	return &UserRepository{}
 }
 
-func (repository *UserRepository) Find() []entities.User {
-	// TODO: ここでDBからデータを取り出す
-	user := []entities.User{}
-	return user
+func (repository *UserRepository) Find() *gorm.DB {
+	db := dbInit()
+
+	user_entity := []entity.User{}
+	return db.Find(&user_entity, 1)
+}
+
+func dbInit() *gorm.DB {
+	dsn := "root:password@tcp(127.0.0.1:3306)/practice?charset=utf8mb4&parseTime=true"
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+	return db
 }
