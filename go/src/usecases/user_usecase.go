@@ -1,7 +1,7 @@
 package usecases
 
 import (
-	service "main/application/services"
+	"main/application/services"
 	"net/http"
 )
 
@@ -10,11 +10,11 @@ type IUserUsecase interface {
 }
 
 type UserUsecase struct {
-	app_service service.IUserAppService
+	app_service services.IUserAppService
 }
 
-func NewUserUsecase() *UserUsecase {
-	return &UserUsecase{}
+func NewUserUsecase(user_app_service services.IUserAppService) *UserUsecase {
+	return &UserUsecase{user_app_service}
 }
 
 func (usecase *UserUsecase) GetUser(w http.ResponseWriter, r *http.Request) ([]byte, error) {

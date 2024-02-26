@@ -19,6 +19,6 @@ func main() {
 		w.Write(response)
 	})
 
-	http.HandleFunc("/user", handlers.UserHandler.GetUserHandler)
+	http.HandleFunc("/user", handlers.GetUserHandler)
 	http.ListenAndServe(":8080", nil)
 }

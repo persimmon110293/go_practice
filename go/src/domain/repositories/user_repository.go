@@ -21,11 +21,11 @@ func (repository *UserRepository) Find() *gorm.DB {
 	db := dbInit()
 
 	user_entity := []entity.User{}
-	return db.Find(&user_entity, 1)
+	return db.Find(&user_entity, 1) // TODO: ここでのgormの使い方を調べる
 }
 
 func dbInit() *gorm.DB {
-	dsn := "root:password@tcp(127.0.0.1:3306)/practice?charset=utf8mb4&parseTime=true"
+	dsn := "root:password@tcp(mysql:3306)/practice?charset=utf8mb4&parseTime=true"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")

@@ -2,7 +2,7 @@ package services
 
 import (
 	"encoding/json"
-	repository "main/domain/repositories"
+	"main/domain/repositories"
 	"net/http"
 )
 
@@ -11,11 +11,11 @@ type IUserAppService interface {
 }
 
 type UserAppService struct {
-	repository repository.IUserRepository
+	repository repositories.IUserRepository
 }
 
-func NewUserAppService() IUserAppService {
-	return &UserAppService{}
+func NewUserAppService(repository repositories.IUserRepository) IUserAppService {
+	return &UserAppService{repository}
 }
 
 func (app_service *UserAppService) GetUser(w http.ResponseWriter, r *http.Request) ([]byte, error) {
