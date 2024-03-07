@@ -13,7 +13,14 @@ func GetUserHandler(w http.ResponseWriter, r *http.Request) {
 	user_repository := repositories.NewUserRepository()
 	user_app_service := services.NewUserAppService(user_repository)
 	usecase := usecases.NewUserUsecase(user_app_service)
-	user, _ := usecase.GetUser(w, r)
+	user, error := usecase.GetUser(w, r)
 
-	fmt.Printf("%s", user)
+	if error != nil {
+		fmt.Println("error occurred")
+		fmt.Println(error)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Println(user)
 }

@@ -1,20 +1,20 @@
 package entities
 
+import "time"
+
 type User struct {
-	name  string
-	age   int
-	email string
-	// created_at time.Time
-	// updated_at time.Time
+	Name       string    `json:"name"`
+	Age        int       `json:"age"`
+	Email      string    `json:"email"`
+	created_at time.Time `json:"created_at"`
+	updated_at time.Time `json:"updated_at"`
 }
 
 func NewUser(name string, age int, email string) *User {
 	return &User{
-		name:  set_name(name),
-		age:   set_age(age),
-		email: set_email(email),
-		// created_at: time.Now(),
-		// updated_at: time.Now(),
+		Name:  set_name(name),
+		Age:   set_age(age),
+		Email: set_email(email),
 	}
 }
 

@@ -2,6 +2,7 @@ package services
 
 import (
 	"encoding/json"
+	"fmt"
 	"main/domain/repositories"
 	"net/http"
 )
@@ -20,5 +21,7 @@ func NewUserAppService(repository repositories.IUserRepository) IUserAppService 
 
 func (app_service *UserAppService) GetUser(w http.ResponseWriter, r *http.Request) ([]byte, error) {
 	user := app_service.repository.Find()
+
+	fmt.Println(user)
 	return json.Marshal(user)
 }

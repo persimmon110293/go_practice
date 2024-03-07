@@ -3,33 +3,30 @@ package main
 import (
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 type Users struct {
-	name       string
-	age        int
-	email      string
-	created_at time.Time
-	updated_at time.Time
+	Name  string
+	Age   int
+	Email string
 }
 
 func seeds(db *gorm.DB) error {
 
-	users := Users{name: "taro", age: 20, email: "taro@taro.com", created_at: time.Now(), updated_at: time.Now()}
+	users := Users{Name: "taro", Age: 20, Email: "taro@taro.com"}
 	if err := db.Create(&users).Error; err != nil {
 		fmt.Printf("%+v", err)
 	}
 
-	users2 := Users{name: "jiro", age: 20, email: "jiro@jiro.com", created_at: time.Now(), updated_at: time.Now()}
+	users2 := Users{Name: "jiro", Age: 20, Email: "jiro@jiro.com"}
 	if err := db.Create(&users2).Error; err != nil {
 		fmt.Printf("%+v", err)
 	}
 
-	users3 := Users{name: "saburo", age: 20, email: "saburo@saburo.com", created_at: time.Now(), updated_at: time.Now()}
+	users3 := Users{Name: "saburo", Age: 20, Email: "saburo@saburo.com"}
 	if err := db.Create(&users3).Error; err != nil {
 		fmt.Printf("%+v", err)
 	}

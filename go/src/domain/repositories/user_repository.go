@@ -20,8 +20,8 @@ func NewUserRepository() IUserRepository {
 func (repository *UserRepository) Find() *gorm.DB {
 	db := dbInit()
 
-	user_entity := []entity.User{}
-	return db.Find(&user_entity, 1) // TODO: ここでのgormの使い方を調べる
+	user_entity := entity.User{}
+	return db.First(&user_entity, 1) // TODO: ここでのgormの使い方を調べる
 }
 
 func dbInit() *gorm.DB {
